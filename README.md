@@ -1,11 +1,11 @@
 # Sentry 小程序 SDK
 
-![npm version](https://img.shields.io/npm/v/sentry-miniapp)
-![npm download](https://img.shields.io/npm/dm/sentry-miniapp)
-![github forks](https://img.shields.io/github/forks/lizhiyao/sentry-miniapp?style=social)
-![github stars](https://img.shields.io/github/stars/lizhiyao/sentry-miniapp?style=social)
-![github watchers](https://img.shields.io/github/watchers/lizhiyao/sentry-miniapp?style=social)
-![github license](https://img.shields.io/github/license/lizhiyao/sentry-miniapp)
+![npm version](https://img.shields.io/npm/v/sentry-uniapp)
+![npm download](https://img.shields.io/npm/dm/sentry-uniapp)
+![github forks](https://img.shields.io/github/forks/uappkit/sentry-uniapp?style=social)
+![github stars](https://img.shields.io/github/stars/uappkit/sentry-uniapp?style=social)
+![github watchers](https://img.shields.io/github/watchers/uappkit/sentry-uniapp?style=social)
+![github license](https://img.shields.io/github/license/uappkit/sentry-uniapp)
 
 用于小程序平台的 Sentry SDK
 
@@ -43,10 +43,10 @@
 
 ### 直接引用
 
-1. 微信小程序和微信小游戏下载 [sentry-miniapp.wx.min.js](https://github.com/lizhiyao/sentry-miniapp/blob/master/examples/weapp/vendor/sentry-miniapp.wx.min.js)；字节跳动小程序下载 [sentry-miniapp.tt.min.js](https://github.com/lizhiyao/sentry-miniapp/blob/master/examples/ttapp/vendor/sentry-miniapp.tt.min.js)；支付宝小程序下载 [sentry-miniapp.my.min.js](https://github.com/lizhiyao/sentry-miniapp/blob/master/examples/myapp/vendor/sentry-miniapp.my.min.js)，钉钉小程序下载 [sentry-miniapp.dd.min.js](https://github.com/lizhiyao/sentry-miniapp/blob/master/examples/ddapp/vendor/sentry-miniapp.dd.min.js)
-2. 参照 `/examples` 中各项目使用方式，将 `sentry-miniapp.xx.min.js` 放入项目的合适目录中，比如放入 `vendor` 文件夹
+1. 微信小程序和微信小游戏下载 [sentry-uniapp.wx.min.js](https://github.com/uappkit/sentry-uniapp/blob/master/examples/weapp/vendor/sentry-uniapp.wx.min.js)；字节跳动小程序下载 [sentry-uniapp.tt.min.js](https://github.com/uappkit/sentry-uniapp/blob/master/examples/ttapp/vendor/sentry-uniapp.tt.min.js)；支付宝小程序下载 [sentry-uniapp.my.min.js](https://github.com/uappkit/sentry-uniapp/blob/master/examples/myapp/vendor/sentry-uniapp.my.min.js)，钉钉小程序下载 [sentry-uniapp.dd.min.js](https://github.com/uappkit/sentry-uniapp/blob/master/examples/ddapp/vendor/sentry-uniapp.dd.min.js)
+2. 参照 `/examples` 中各项目使用方式，将 `sentry-uniapp.xx.min.js` 放入项目的合适目录中，比如放入 `vendor` 文件夹
 3. 参照 `/examples/app.js` 代码，进行 `Sentry` 的初始化
-4. 对于提供了微信、字节跳动小程序 `sentry-miniapp` 会自动上报 `xx.onError()` 捕获的异常，对于支付宝小程序需要应用开发者在 `App.onError()` 中主动进行异常上报。详情可见 `/docs/cross-platform.md`。
+4. 对于提供了微信、字节跳动小程序 `sentry-uniapp` 会自动上报 `xx.onError()` 捕获的异常，对于支付宝小程序需要应用开发者在 `App.onError()` 中主动进行异常上报。详情可见 `/docs/cross-platform.md`。
 
 ### npm 方式
 
@@ -55,9 +55,9 @@
 1. 安装依赖
 
    ```bash
-   npm install sentry-miniapp --save
+   npm install sentry-uniapp --save
    # 或者
-   yarn add sentry-miniapp
+   yarn add sentry-uniapp
    ```
 
 2. 使用「微信开发者工具 - 工具 - 构建 npm」进行构建，详情可参考[npm 支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
@@ -65,7 +65,7 @@
 3. 在 `app.js` 中引用并初始化 `Sentry`，根据实际需求设置上报到 Sentry 的元信息
 
    ```js
-   import * as Sentry from "sentry-miniapp";
+   import * as Sentry from "sentry-uniapp";
 
    // init Sentry
    // init options: https://github.com/getsentry/sentry-javascript/blob/master/packages/types/src/options.ts
@@ -117,9 +117,9 @@
 
 ![Dashboard](docs/sentry-hub.png)
 
-#### sentry-miniapp 设计图
+#### sentry-uniapp 设计图
 
-![Dashboard](docs/sentry-miniapp.png)
+![Dashboard](docs/sentry-uniapp.png)
 
 ### 相关命令
 
@@ -127,22 +127,22 @@
 # 根据 package.json 中的版本号更新 SDK 源码中的版本号
 npm run version
 
-# 构建供小程序直接引用的 sentry-miniapp.xx.min.js；在本地可直接使用开发者工具打开 examples 下具体项目进行调试
+# 构建供小程序直接引用的 sentry-uniapp.xx.min.js；在本地可直接使用开发者工具打开 examples 下具体项目进行调试
 npm run build:dist
 
-# 构建供微信小程序直接引用的 sentry-miniapp.wx.min.js
+# 构建供微信小程序直接引用的 sentry-uniapp.wx.min.js
 npm run build:wx
 
-# 构建供支付宝小程序直接引用的 sentry-miniapp.my.min.js
+# 构建供支付宝小程序直接引用的 sentry-uniapp.my.min.js
 npm run build:my
 
-# 构建供钉钉小程序直接引用的 sentry-miniapp.dd.min.js
+# 构建供钉钉小程序直接引用的 sentry-uniapp.dd.min.js
 npm run build:dd
 
-# 构建供字节跳动小程序直接引用的 sentry-miniapp.tt.min.js
+# 构建供字节跳动小程序直接引用的 sentry-uniapp.tt.min.js
 npm run build:tt
 
-# 构建供百度小程序直接引用的 sentry-miniapp.swan.min.js
+# 构建供百度小程序直接引用的 sentry-uniapp.swan.min.js
 npm run build:swan
 
 # 构建用于发布到 npm 的 dist 资源
@@ -162,7 +162,7 @@ npm publish --registry=https://registry.npmjs.org/
 ![Error01](docs/screenshot/sentry-error-01.png)
 ![Error02](docs/screenshot/sentry-error-02.png)
 
-## 谁在使用 sentry-miniapp
+## 谁在使用 sentry-uniapp
 
 ### 微信小程序
 
@@ -201,15 +201,15 @@ npm publish --registry=https://registry.npmjs.org/
 
 ## 贡献
 
-欢迎通过 `issue`、`pull request`等方式贡献 `sentry-miniapp`。
+欢迎通过 `issue`、`pull request`等方式贡献 `sentry-uniapp`。
 
 ## 联系作者
 
-PS. 由于微信群二维码有时效性限制，想入群的同学还可以加作者微信（添加时请备注 sentry-miniapp），由作者邀请入群
+PS. 由于微信群二维码有时效性限制，想入群的同学还可以加作者微信（添加时请备注 sentry-uniapp），由作者邀请入群
 
-### sentry-miniapp 微信交流群
+### sentry-uniapp 微信交流群
 
-<img src="docs/qrcode/sentry-miniapp.jpeg" alt="微信交流群二维码" width="300" height="400" />
+<img src="docs/qrcode/sentry-uniapp.jpeg" alt="微信交流群二维码" width="300" height="400" />
 
 ### 作者微信二维码
 

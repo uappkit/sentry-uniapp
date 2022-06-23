@@ -1,4 +1,4 @@
-import * as Sentry from "./vendor/sentry-miniapp.dd.min";
+import * as Sentry from "./vendor/sentry-uniapp.dd.min";
 console.log("Sentry", Sentry);
 // 初始化 Sentry
 Sentry.init({

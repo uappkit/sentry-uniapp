@@ -58,7 +58,7 @@ export class MiniappClient extends BaseClient<MiniappBackend, MiniappOptions> {
       packages: [
         ...((event.sdk && event.sdk.packages) || []),
         {
-          name: "npm:@sentry/miniapp",
+          name: "npm:sentry-uniapp",
           version: SDK_VERSION
         }
       ],
@@ -76,6 +76,6 @@ export class MiniappClient extends BaseClient<MiniappBackend, MiniappOptions> {
    */
   public showReportDialog(options: ReportDialogOptions = {}): void {
     // doesn't work without a document (React Native)
-    console.log('sentry-miniapp 暂未实现该方法', options);
+    console.log('sentry-uniapp 暂未实现该方法', options);
   }
 }

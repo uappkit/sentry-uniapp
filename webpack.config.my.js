@@ -4,7 +4,7 @@ const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
   output: {
-    filename: "sentry-miniapp.my.min.js",
+    filename: "sentry-uniapp.my.min.js",
     path: path.resolve(__dirname, "./examples/myapp/vendor")
   }
 });

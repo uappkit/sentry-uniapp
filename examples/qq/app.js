@@ -1,4 +1,4 @@
-import * as Sentry from "./vendor/sentry-miniapp.qq.min";
+import * as Sentry from "./vendor/sentry-uniapp.qq.min";
 // 初始化 Sentry
 Sentry.init({
   dsn:

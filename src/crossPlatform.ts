@@ -1,8 +1,9 @@
-declare const wx: any; // 微信小程序、微信小游戏
-declare const my: any; // 支付宝小程序
-declare const tt: any; // 字节跳动小程序
-declare const dd: any; // 钉钉小程序
-declare const qq: any; // QQ 小程序、QQ 小游戏
+declare const uni: any;  // uniapp
+declare const wx: any;   // 微信小程序、微信小游戏
+declare const my: any;   // 支付宝小程序
+declare const tt: any;   // 字节跳动小程序
+declare const dd: any;   // 钉钉小程序
+declare const qq: any;   // QQ 小程序、QQ 小游戏
 declare const swan: any; // 百度小程序
 
 /**
@@ -23,6 +24,7 @@ interface SDK {
  * 小程序平台 接口
  */
 type AppName =
+  | "uniapp"
   | "wechat"
   | "alipay"
   | "bytedance"
@@ -44,9 +46,11 @@ const getSDK = () => {
     getSystemInfoSync: () => {},
   };
 
-  if (typeof wx === "object") {
+  if (typeof uni === "object") {
+    currentSdk = uni;
+  } else if (typeof wx === "object") {
     // tslint:disable-next-line: no-unsafe-any
-    currentSdk = wx;
+    currentSdk = uni;
   } else if (typeof my === "object") {
     // tslint:disable-next-line: no-unsafe-any
     currentSdk = my;
@@ -63,7 +67,7 @@ const getSDK = () => {
     // tslint:disable-next-line: no-unsafe-any
     currentSdk = swan;
   } else {
-    throw new Error("sentry-miniapp 暂不支持此平台");
+    throw new Error("sentry-uniapp 暂不支持此平台");
   }
 
   return currentSdk;
@@ -75,7 +79,9 @@ const getSDK = () => {
 const getAppName = () => {
   let currentAppName: AppName = "unknown";
 
-  if (typeof wx === "object") {
+  if (typeof uni === "object") {
+    currentAppName = "uniapp";
+  } else if (typeof wx === "object") {
     currentAppName = "wechat";
   } else if (typeof my === "object") {
     currentAppName = "alipay";

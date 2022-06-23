@@ -1,7 +1,7 @@
 import "./js/libs/weapp-adapter";
 import "./js/libs/symbol";
 
-import * as Sentry from "./vendor/sentry-miniapp.wx.min";
+import * as Sentry from "./vendor/sentry-uniapp.wx.min";
 const {
   Integrations: { Router },
 } = Sentry;

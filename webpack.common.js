@@ -2,7 +2,7 @@ module.exports = {
   mode: "production",
   entry: "./src/index.ts",
   output: {
-    filename: "sentry-miniapp.min.js",
+    filename: "sentry-uniapp.min.js",
     library: "Sentry",
     libraryTarget: "commonjs2"
   },

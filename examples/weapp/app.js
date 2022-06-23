@@ -1,4 +1,4 @@
-import * as Sentry from "./vendor/sentry-miniapp.wx.min";
+import * as Sentry from "./vendor/sentry-uniapp.wx.min";
 // 初始化 Sentry
 Sentry.init({
   dsn: "https://47703e01ba4344b8b252c15e8fd980fd@sentry.io/1528228",
@@ -51,7 +51,7 @@ App({
               // Sentry.captureException(
               //   new Error("Good good stydy, day day up!")
               // );
-              // Sentry.captureMessage("Hello, sentry-miniapp!");
+              // Sentry.captureMessage("Hello, sentry-uniapp!");
 
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况

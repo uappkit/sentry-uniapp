@@ -30,7 +30,7 @@ export const defaultIntegrations = [
 ];
 
 /**
- * The Sentry Miniapp SDK Client.
+ * The Sentry Uniapp SDK Client.
  *
  * To use this SDK, call the {@link init} function as early as possible when
  * launching the app. To set context information or send manual events, use
@@ -38,7 +38,7 @@ export const defaultIntegrations = [
  *
  * @example
  * ```
- * import { init } from '@sentry/miniapp';
+ * import { init } from 'sentry-uniapp';
  *
  * init({
  *   dsn: '__DSN__',
@@ -48,7 +48,7 @@ export const defaultIntegrations = [
  *
  * @example
  * ```
- * import { configureScope } from '@sentry/miniapp';
+ * import { configureScope } from 'sentry-uniapp';
  *
  * configureScope((scope: Scope) => {
  *   scope.setExtra({ battery: 0.7 });
@@ -59,7 +59,7 @@ export const defaultIntegrations = [
  *
  * @example
  * ```
- * import { addBreadcrumb } from '@sentry/miniapp';
+ * import { addBreadcrumb } from 'sentry-uniapp';
  *
  * addBreadcrumb({
  *   message: 'My Breadcrumb',
@@ -69,7 +69,7 @@ export const defaultIntegrations = [
  *
  * @example
  * ```
- * import * as Sentry from '@sentry/miniapp';
+ * import * as Sentry from 'sentry-uniapp';
  *
  * Sentry.captureMessage('Hello, world!');
  * Sentry.captureException(new Error('Good bye'));
@@ -90,7 +90,7 @@ export function init(options: MiniappOptions = {}): void {
     options.defaultIntegrations = defaultIntegrations;
   }
 
-  // https://github.com/lizhiyao/sentry-miniapp/issues/23
+  // https://github.com/uappkit/sentry-uniapp/issues/23
   options.normalizeDepth = options.normalizeDepth || 5;
 
   initAndBind(MiniappClient, options);
