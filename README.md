@@ -24,6 +24,7 @@
 - [x] 支持支付宝小程序
 - [x] 支持钉钉小程序
 - [x] 支持百度小程序
+- [x] 支持快应用
 - [x] 支持在 [Taro](https://taro.aotu.io/) 等第三方小程序框架中使用
 - [x] 默认上报异常发生时的路由栈
 - [ ] 完善的代码测试
@@ -130,22 +131,7 @@ npm run version
 # 构建供小程序直接引用的 sentry-uniapp.xx.min.js；在本地可直接使用开发者工具打开 examples 下具体项目进行调试
 npm run build:dist
 
-# 构建供微信小程序直接引用的 sentry-uniapp.wx.min.js
-npm run build:wx
-
-# 构建供支付宝小程序直接引用的 sentry-uniapp.my.min.js
-npm run build:my
-
-# 构建供钉钉小程序直接引用的 sentry-uniapp.dd.min.js
-npm run build:dd
-
-# 构建供字节跳动小程序直接引用的 sentry-uniapp.tt.min.js
-npm run build:tt
-
-# 构建供百度小程序直接引用的 sentry-uniapp.swan.min.js
-npm run build:swan
-
-# 构建用于发布到 npm 的 dist 资源
+# 构建用于发布到 npm 的 dist & esm 资源
 npm run build
 
 # 构建用于发布到 npm 的 esm 资源
@@ -205,12 +191,4 @@ npm publish --registry=https://registry.npmjs.org/
 
 ## 联系作者
 
-PS. 由于微信群二维码有时效性限制，想入群的同学还可以加作者微信（添加时请备注 sentry-uniapp），由作者邀请入群
-
-### sentry-uniapp 微信交流群
-
-<img src="docs/qrcode/sentry-uniapp.jpeg" alt="微信交流群二维码" width="300" height="400" />
-
-### 作者微信二维码
-
-<img src="docs/qrcode/zhiyao.jpeg" alt="作者微信二维码" width="300" height="300" />
+微信: yinqisen
