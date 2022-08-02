@@ -1,0 +1,23 @@
+<script>
+/**
+ * @file 应用级别的配置，供所有页面公用
+ * 可在app.ux导出公用变量
+ * 其他src目录下的ux文件使用this.$app.$def.<paramName>即可调用此处导出的变量
+ * 文档地址： https://doc.quickapp.cn/framework/source-file.html#appux
+ */
+
+// 引入全局函数定义文件global.js
+import './global'
+import * as sentry from 'sentry-uniapp'
+
+sentry.init({
+  dsn: "https://9d8f4b56ae4f4a48bc1e0974d7642a87@sentry.io/1534850"
+});
+
+setTimeout(() => {
+  sentry.captureMessage("TEST sentry message");
+}, 1000)
+
+export default {}
+
+</script>

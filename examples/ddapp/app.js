@@ -1,5 +1,5 @@
-import * as Sentry from "./vendor/sentry-uniapp.dd.min";
-console.log("Sentry", Sentry);
+import * as sentry from 'sentry-uniapp'
+
 // 初始化 Sentry
 Sentry.init({
   platform: "dd",
