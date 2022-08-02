@@ -6,6 +6,13 @@ module.exports = {
     library: "Sentry",
     libraryTarget: "commonjs2"
   },
+  externals: {
+    '@system.app': 'crossPlatform',
+    '@system.device': 'crossPlatform',
+    '@system.battery': 'crossPlatform',
+    '@system.router': 'crossPlatform',
+    '@system.fetch': 'crossPlatform'
+  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"]
   },

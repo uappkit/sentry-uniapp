@@ -1,3 +1,5 @@
+const globalCopy: any = global;
+
 declare const uni: any;  // uniapp
 declare const wx: any;   // 微信小程序、微信小游戏
 declare const my: any;   // 支付宝小程序
@@ -5,6 +7,7 @@ declare const tt: any;   // 字节跳动小程序
 declare const dd: any;   // 钉钉小程序
 declare const qq: any;   // QQ 小程序、QQ 小游戏
 declare const swan: any; // 百度小程序
+declare const QuickApp: any; // 快应用
 
 /**
  * 小程序平台 SDK 接口
@@ -12,6 +15,7 @@ declare const swan: any; // 百度小程序
 interface SDK {
   request: Function;
   httpRequest?: Function; // 针对钉钉小程序
+  getSystemInfo: Function;
   getSystemInfoSync: Function;
   onError?: Function;
   onUnhandledRejection?: Function;
@@ -31,41 +35,128 @@ type AppName =
   | "dingtalk"
   | "qq"
   | "swan"
+  | "quickapp"
   | "unknown";
+
+let currentSdk: SDK = {
+  // tslint:disable-next-line: no-empty
+  request: () => {
+  },
+  // tslint:disable-next-line: no-empty
+  httpRequest: () => {
+  },
+  // tslint:disable-next-line: no-empty
+  getSystemInfoSync: () => {
+  },
+  // tslint:disable-next-line: no-empty
+  getSystemInfo: () => {
+  },
+};
 
 /**
  * 获取跨平台的 SDK
  */
 const getSDK = () => {
-  let currentSdk: SDK = {
-    // tslint:disable-next-line: no-empty
-    request: () => {},
-    // tslint:disable-next-line: no-empty
-    httpRequest: () => {},
-    // tslint:disable-next-line: no-empty
-    getSystemInfoSync: () => {},
-  };
-
   if (typeof uni === "object") {
     currentSdk = uni;
   } else if (typeof wx === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = uni;
   } else if (typeof my === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = my;
   } else if (typeof tt === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = tt;
   } else if (typeof dd === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = dd;
   } else if (typeof qq === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = qq;
   } else if (typeof swan === "object") {
-    // tslint:disable-next-line: no-unsafe-any
     currentSdk = swan;
+  } else if (typeof QuickApp === 'object') {
+
+    // 针对快应用的兼容性封装
+    globalCopy.getCurrentPages = () => {
+      // tslint:disable-next-line:no-implicit-dependencies
+      const router = require('@system.router')
+      const stacks: any = router.getPages()
+      const ret = []
+      for (const route of stacks) {
+        ret.push({
+          route: route.path,
+          options: {},
+        })
+      }
+
+      return ret
+    }
+
+    // tslint:disable-next-line:no-implicit-dependencies
+    const fetch = require('@system.fetch')
+    currentSdk.request = fetch.fetch
+
+    currentSdk.getSystemInfo = () => {
+      return new Promise<any>((resolve, reject) => {
+        // tslint:disable-next-line:no-implicit-dependencies
+        const app = require('@system.app')
+        const appInfo = app.getInfo();
+
+        // tslint:disable-next-line:no-implicit-dependencies
+        const device = require('@system.device')
+
+        // tslint:disable-next-line:no-implicit-dependencies
+        const battery = require('@system.battery')
+
+        const ret = {
+          SDKVersion: appInfo.versionName,
+          battery: 0,
+          batteryLevel: 0,
+          currentBattery: 0,
+          appName: appInfo.name,
+          system: '',
+          model: String,
+          brand: String,
+          platform: String,
+          screenHeight: Number,
+          screenWidth: Number,
+          statusBarHeight: Number,
+          language: String,
+          windowWidth: Number,
+          windowHeight: Number,
+        }
+
+        device.getInfo({
+          // tslint:disable-next-line:no-shadowed-variable
+          success: (deviceInfo: any) => {
+            ret.language = deviceInfo.language;
+            ret.brand = deviceInfo.brand;
+            ret.model = deviceInfo.model;
+            ret.platform = deviceInfo.platformVersionName;
+            ret.screenHeight = deviceInfo.screenHeight;
+            ret.screenWidth = deviceInfo.screenWidth;
+            ret.statusBarHeight = deviceInfo.statusBarHeight;
+            ret.windowHeight = deviceInfo.windowHeight;
+            ret.windowWidth = deviceInfo.windowWidth;
+            ret.system = `${deviceInfo.osType} ${deviceInfo.osVersionName}`;
+
+            battery.getStatus({
+              success: (batteryStatus: any) => {
+                ret.battery = batteryStatus.level;
+                ret.currentBattery = batteryStatus.level;
+                resolve(ret)
+              },
+              fail: (e: any) => {
+                reject(e)
+              }
+            })
+          },
+          fail: (e: any) => {
+            reject(e)
+          }
+        })
+      })
+    }
+
+    // end of QuickApp
+
   } else {
     throw new Error("sentry-uniapp 暂不支持此平台");
   }
@@ -93,6 +184,8 @@ const getAppName = () => {
     currentAppName = "qq";
   } else if (typeof swan === "object") {
     currentAppName = "swan";
+  } else if (typeof QuickApp === "object") {
+    currentAppName = "quickapp";
   }
 
   return currentAppName;
@@ -101,4 +194,4 @@ const getAppName = () => {
 const sdk = getSDK();
 const appName = getAppName();
 
-export { sdk, appName };
+export {sdk, appName};

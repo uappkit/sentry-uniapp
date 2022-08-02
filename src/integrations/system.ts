@@ -19,10 +19,11 @@ export class System implements Integration {
    * @inheritDoc
    */
   public setupOnce(): void {
-    addGlobalEventProcessor((event: Event) => {
+    addGlobalEventProcessor(async (event: Event) => {
       if (getCurrentHub().getIntegration(System)) {
         try {
-          const systemInfo = sdk.getSystemInfoSync();
+          const systemInfo = await sdk.getSystemInfo()
+
           const {
             SDKVersion = "0.0.0",
             batteryLevel, // 微信小程序
