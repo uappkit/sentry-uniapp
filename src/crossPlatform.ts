@@ -106,7 +106,7 @@ const getSDK = () => {
         const battery = require('@system.battery')
 
         const ret = {
-          SDKVersion: appInfo.versionName,
+          version: appInfo.versionName,
           battery: 0,
           batteryLevel: 0,
           currentBattery: 0,
@@ -121,6 +121,7 @@ const getSDK = () => {
           language: String,
           windowWidth: Number,
           windowHeight: Number,
+          fontSizeSetting: '',
         }
 
         device.getInfo({
@@ -139,7 +140,6 @@ const getSDK = () => {
 
             battery.getStatus({
               success: (batteryStatus: any) => {
-                ret.battery = batteryStatus.level;
                 ret.currentBattery = batteryStatus.level;
                 resolve(ret)
               },

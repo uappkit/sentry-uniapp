@@ -2,6 +2,7 @@ import { addGlobalEventProcessor, getCurrentHub } from "@sentry/core";
 import { Event, Integration } from "@sentry/types";
 
 import { appName as currentAppName, sdk } from "../crossPlatform";
+import { SDK_VERSION } from "../version";
 
 /** UserAgent */
 export class System implements Integration {
@@ -25,7 +26,6 @@ export class System implements Integration {
           const systemInfo = await sdk.getSystemInfo()
 
           const {
-            SDKVersion = "0.0.0",
             batteryLevel, // 微信小程序
             currentBattery, // 支付宝小程序、 钉钉小程序
             battery, // 字节跳动小程序
@@ -45,6 +45,9 @@ export class System implements Integration {
             appName, // 字节跳动小程序
             fontSizeSetting, // 支付宝小程序、 钉钉小程序、微信小程序
           } = systemInfo;
+
+          // tslint:disable-next-line:variable-name
+          const SDKVersion = SDK_VERSION;
           const [systemName, systemVersion] = system.split(" ");
 
           return {
