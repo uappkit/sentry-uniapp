@@ -53,6 +53,9 @@ let currentSdk: SDK = {
   },
 };
 
+// tslint:disable-next-line:no-implicit-dependencies no-var-requires
+const fetch = require('@system.fetch')
+
 /**
  * 获取跨平台的 SDK
  */
@@ -71,7 +74,7 @@ const getSDK = () => {
     currentSdk = qq;
   } else if (typeof swan === "object") {
     currentSdk = swan;
-  } else if (typeof QuickApp === 'object') {
+  } else if (typeof fetch === 'object') {
 
     // 针对快应用的兼容性封装
     globalCopy.getCurrentPages = () => {
@@ -89,10 +92,7 @@ const getSDK = () => {
       return ret
     }
 
-    // tslint:disable-next-line:no-implicit-dependencies
-    const fetch = require('@system.fetch')
     currentSdk.request = fetch.fetch
-
     currentSdk.getSystemInfo = () => {
       return new Promise<any>((resolve, reject) => {
         // tslint:disable-next-line:no-implicit-dependencies
@@ -155,10 +155,9 @@ const getSDK = () => {
       })
     }
 
-    // end of QuickApp
-
   } else {
-    throw new Error("sentry-uniapp 暂不支持此平台");
+    // tslint:disable-next-line:no-console
+    console.log("sentry-uniapp 暂不支持此平台");
   }
 
   return currentSdk;
@@ -184,7 +183,7 @@ const getAppName = () => {
     currentAppName = "qq";
   } else if (typeof swan === "object") {
     currentAppName = "swan";
-  } else if (typeof QuickApp === "object") {
+  } else if (typeof fetch === "object") {
     currentAppName = "quickapp";
   }
 
