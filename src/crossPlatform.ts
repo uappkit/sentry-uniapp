@@ -7,7 +7,6 @@ declare const tt: any;   // 字节跳动小程序
 declare const dd: any;   // 钉钉小程序
 declare const qq: any;   // QQ 小程序、QQ 小游戏
 declare const swan: any; // 百度小程序
-declare const QuickApp: any; // 快应用
 
 /**
  * 小程序平台 SDK 接口
@@ -53,8 +52,30 @@ let currentSdk: SDK = {
   },
 };
 
-// tslint:disable-next-line:no-implicit-dependencies no-var-requires
-const fetch = require('@system.fetch')
+let quickApp: any
+let router: any
+let app: any
+let device: any
+let battery: any
+
+try {
+  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
+  quickApp = require('@system.fetch')
+
+  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
+  router = require('@system.router')
+
+  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
+  app = require('@system.app')
+
+  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
+  device = require('@system.device')
+
+  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
+  battery = require('@system.battery')
+} catch {
+  quickApp = undefined
+}
 
 /**
  * 获取跨平台的 SDK
@@ -74,12 +95,10 @@ const getSDK = () => {
     currentSdk = qq;
   } else if (typeof swan === "object") {
     currentSdk = swan;
-  } else if (typeof fetch === 'object') {
+  } else if (typeof quickApp === 'object') {
 
     // 针对快应用的兼容性封装
     globalCopy.getCurrentPages = () => {
-      // tslint:disable-next-line:no-implicit-dependencies
-      const router = require('@system.router')
       const stacks: any = router.getPages()
       const ret = []
       for (const route of stacks) {
@@ -92,18 +111,10 @@ const getSDK = () => {
       return ret
     }
 
-    currentSdk.request = fetch.fetch
-    currentSdk.getSystemInfo = () => {
-      return new Promise<any>((resolve, reject) => {
-        // tslint:disable-next-line:no-implicit-dependencies
-        const app = require('@system.app')
+    currentSdk.request = quickApp.fetch
+    currentSdk.getSystemInfo = () =>
+      new Promise<any>((resolve, reject) => {
         const appInfo = app.getInfo();
-
-        // tslint:disable-next-line:no-implicit-dependencies
-        const device = require('@system.device')
-
-        // tslint:disable-next-line:no-implicit-dependencies
-        const battery = require('@system.battery')
 
         const ret = {
           version: appInfo.versionName,
@@ -153,7 +164,6 @@ const getSDK = () => {
           }
         })
       })
-    }
 
   } else {
     // tslint:disable-next-line:no-console
@@ -183,7 +193,7 @@ const getAppName = () => {
     currentAppName = "qq";
   } else if (typeof swan === "object") {
     currentAppName = "swan";
-  } else if (typeof fetch === "object") {
+  } else if (typeof quickApp === "object") {
     currentAppName = "quickapp";
   }
 
