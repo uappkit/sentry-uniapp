@@ -1,13 +1,12 @@
 # Sentry 小程序 SDK
 
-![npm version](https://img.shields.io/npm/v/sentry-uniapp)
-![npm download](https://img.shields.io/npm/dm/sentry-uniapp)
-![github forks](https://img.shields.io/github/forks/uappkit/sentry-uniapp?style=social)
-![github stars](https://img.shields.io/github/stars/uappkit/sentry-uniapp?style=social)
-![github watchers](https://img.shields.io/github/watchers/uappkit/sentry-uniapp?style=social)
-![github license](https://img.shields.io/github/license/uappkit/sentry-uniapp)
+Sentry SDK 的封装，可用于Uniapp全端，及微信小程序，抖音小程序，百度小程序等各家平台。
 
-用于小程序平台的 Sentry SDK
+> 提示：由于快应用 require 方式特殊性，webpack是在编译期处理的，所以动态代码检测无效，使用时去更改webpack配置也增加了复杂行，所以单独维护，包名为 sentry-quickapp。
+ 
+快应用项目可参考：
+
+<https://github.com/uappkit/sentry-quickapp>
 
 ## 功能特点
 
@@ -28,8 +27,6 @@
 - [x] 支持在 [Taro](https://taro.aotu.io/) 等第三方小程序框架中使用
 - [x] 默认上报异常发生时的路由栈
 - [ ] 完善的代码测试
-
-> 提示：由于快 应用 require 方式特殊性，webpack是在编译期处理的，所以动态代码检测无效，使用时去更改webpack配置也增加了复杂行，所以单独维护，包名为 sentry-quickapp，快应用项目请改为 sentry-quickapp
 
 ## 用法
 
