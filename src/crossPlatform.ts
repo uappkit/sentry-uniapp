@@ -1,5 +1,3 @@
-const globalCopy: any = global;
-
 declare const uni: any;  // uniapp
 declare const wx: any;   // 微信小程序、微信小游戏
 declare const my: any;   // 支付宝小程序
@@ -52,31 +50,6 @@ let currentSdk: SDK = {
   },
 };
 
-let quickApp: any
-let router: any
-let app: any
-let device: any
-let battery: any
-
-try {
-  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
-  quickApp = require('@system.fetch')
-
-  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
-  router = require('@system.router')
-
-  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
-  app = require('@system.app')
-
-  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
-  device = require('@system.device')
-
-  // tslint:disable-next-line:no-implicit-dependencies no-var-requires
-  battery = require('@system.battery')
-} catch {
-  quickApp = undefined
-}
-
 /**
  * 获取跨平台的 SDK
  */
@@ -95,79 +68,9 @@ const getSDK = () => {
     currentSdk = qq;
   } else if (typeof swan === "object") {
     currentSdk = swan;
-  } else if (typeof quickApp === 'object') {
-
-    // 针对快应用的兼容性封装
-    globalCopy.getCurrentPages = () => {
-      const stacks: any = router.getPages()
-      const ret = []
-      for (const route of stacks) {
-        ret.push({
-          route: route.path,
-          options: {},
-        })
-      }
-
-      return ret
-    }
-
-    currentSdk.request = quickApp.fetch
-    currentSdk.getSystemInfo = () =>
-      new Promise<any>((resolve, reject) => {
-        const appInfo = app.getInfo();
-
-        const ret = {
-          version: appInfo.versionName,
-          battery: 0,
-          batteryLevel: 0,
-          currentBattery: 0,
-          appName: appInfo.name,
-          system: '',
-          model: String,
-          brand: String,
-          platform: String,
-          screenHeight: Number,
-          screenWidth: Number,
-          statusBarHeight: Number,
-          language: String,
-          windowWidth: Number,
-          windowHeight: Number,
-          fontSizeSetting: '',
-        }
-
-        device.getInfo({
-          // tslint:disable-next-line:no-shadowed-variable
-          success: (deviceInfo: any) => {
-            ret.language = deviceInfo.language;
-            ret.brand = deviceInfo.brand;
-            ret.model = deviceInfo.model;
-            ret.platform = deviceInfo.platformVersionName;
-            ret.screenHeight = deviceInfo.screenHeight;
-            ret.screenWidth = deviceInfo.screenWidth;
-            ret.statusBarHeight = deviceInfo.statusBarHeight;
-            ret.windowHeight = deviceInfo.windowHeight;
-            ret.windowWidth = deviceInfo.windowWidth;
-            ret.system = `${deviceInfo.osType} ${deviceInfo.osVersionName}`;
-
-            battery.getStatus({
-              success: (batteryStatus: any) => {
-                ret.currentBattery = batteryStatus.level;
-                resolve(ret)
-              },
-              fail: (e: any) => {
-                reject(e)
-              }
-            })
-          },
-          fail: (e: any) => {
-            reject(e)
-          }
-        })
-      })
-
   } else {
     // tslint:disable-next-line:no-console
-    console.log("sentry-uniapp 暂不支持此平台");
+    console.log("sentry-uniapp 暂不支持此平台, 快应用请使用 sentry-quickapp");
   }
 
   return currentSdk;
@@ -193,8 +96,6 @@ const getAppName = () => {
     currentAppName = "qq";
   } else if (typeof swan === "object") {
     currentAppName = "swan";
-  } else if (typeof quickApp === "object") {
-    currentAppName = "quickapp";
   }
 
   return currentAppName;
