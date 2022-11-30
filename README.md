@@ -69,7 +69,8 @@ Sentry SDK 的封装，可用于Uniapp全端，及微信小程序，抖音小程
 
    // init Sentry
    // init options: https://github.com/getsentry/sentry-javascript/blob/master/packages/types/src/options.ts
-   // extraOptions 可以禁用哪些监听事件，例如禁用uniapp下的onmemorywarning LOG提示，定义见: GlobalHandlersIntegrations
+   // extraOptions 可以禁用哪些监听事件，定义见: GlobalHandlersIntegrations
+   // 例如出现 LOG: API `onMemoryWarning` is not yet implemented，可通过 `onmemorywarning: false` 关闭
    Sentry.init({
      dsn: "__DSN__",
      extraOptions: {
@@ -198,6 +199,12 @@ npm publish --registry=https://registry.npmjs.org/
 ## 贡献
 
 欢迎通过 `issue`、`pull request`等方式贡献 `sentry-uniapp`。
+
+## 感谢
+
+最早是直接用的github fork，但发现fork的repo会有一些限制，所以重新创建的这个，本项目基于下面开源基础上修改:
+
+<https://github.com/lizhiyao/sentry-miniapp>
 
 ## 联系作者
 
