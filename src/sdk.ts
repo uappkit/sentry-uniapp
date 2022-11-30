@@ -94,7 +94,7 @@ export function init(options: MiniappOptions = {}): void {
   options.normalizeDepth = options.normalizeDepth || 5;
 
   if (options.defaultIntegrations) {
-    (defaultIntegrations[3] as GlobalHandlers).setExtraOptions(options.extraOptions);
+    (options.defaultIntegrations[3] as GlobalHandlers).setExtraOptions(options.extraOptions);
   }
 
   initAndBind(MiniappClient, options);
