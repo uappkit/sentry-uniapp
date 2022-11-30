@@ -49,6 +49,17 @@ export class GlobalHandlers implements Integration {
       ...options,
     };
   }
+
+  /** JSDoc */
+  public setExtraOptions(extraOptions?: any): void {
+    if (extraOptions) {
+      this._options.onerror = !!extraOptions.onerror;
+      this._options.onunhandledrejection = !!extraOptions.onunhandledrejection;
+      this._options.onpagenotfound = !!extraOptions.onpagenotfound;
+      this._options.onmemorywarning = !!extraOptions.onmemorywarning;
+    }
+  }
+
   /**
    * @inheritDoc
    */

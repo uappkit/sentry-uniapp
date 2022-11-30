@@ -24,6 +24,8 @@ export interface MiniappOptions extends Options {
    * By default, all errors will be sent.
    */
   whitelistUrls?: Array<string | RegExp>;
+
+  extraOptions?: Object;
 }
 
 /**

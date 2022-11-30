@@ -57,7 +57,7 @@ const getSDK = () => {
   if (typeof uni === "object") {
     currentSdk = uni;
   } else if (typeof wx === "object") {
-    currentSdk = uni;
+    currentSdk = wx;
   } else if (typeof my === "object") {
     currentSdk = my;
   } else if (typeof tt === "object") {
@@ -103,5 +103,14 @@ const getAppName = () => {
 
 const sdk = getSDK();
 const appName = getAppName();
+
+sdk.getSystemInfo = () =>
+  new Promise<any>((resolve, reject) => {
+    try {
+      resolve(sdk.getSystemInfoSync())
+    } catch (e) {
+      reject(e)
+    }
+  })
 
 export {sdk, appName};

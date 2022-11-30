@@ -69,8 +69,12 @@ Sentry SDK 的封装，可用于Uniapp全端，及微信小程序，抖音小程
 
    // init Sentry
    // init options: https://github.com/getsentry/sentry-javascript/blob/master/packages/types/src/options.ts
+   // extraOptions 可以禁用哪些监听事件，例如禁用uniapp下的onmemorywarning LOG提示，定义见: GlobalHandlersIntegrations
    Sentry.init({
      dsn: "__DSN__",
+     extraOptions: {
+       onmemorywarning: false,
+     },
      // ...
    });
 
@@ -89,8 +93,15 @@ Sentry SDK 的封装，可用于Uniapp全端，及微信小程序，抖音小程
    });
 
    // Capture exceptions, messages or manual events
+   // Error 无法定义标题，可以用下面的 captureMessage
    Sentry.captureException(new Error("Good bye"));
-   Sentry.captureMessage("Hello, world!");
+ 
+   // captureMessage 可以定制消息标题
+   // extra 为附加的对象内容
+   Sentry.captureMessage("message title", {
+     extra
+   });
+ 
    Sentry.captureEvent({
      message: "Manual",
      stacktrace: [
