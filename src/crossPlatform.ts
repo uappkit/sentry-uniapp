@@ -104,13 +104,4 @@ const getAppName = () => {
 const sdk = getSDK();
 const appName = getAppName();
 
-sdk.getSystemInfo = () =>
-  new Promise<any>((resolve, reject) => {
-    try {
-      resolve(sdk.getSystemInfoSync())
-    } catch (e) {
-      reject(e)
-    }
-  })
-
 export {sdk, appName};

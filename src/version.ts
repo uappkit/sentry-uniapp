@@ -1,2 +1,2 @@
 export const SDK_NAME = "sentry.javascript.miniapp";
-export const SDK_VERSION = "1.0.9";
+export const SDK_VERSION = "1.0.10";
