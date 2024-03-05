@@ -53,10 +53,21 @@ export class GlobalHandlers implements Integration {
   /** JSDoc */
   public setExtraOptions(extraOptions?: any): void {
     if (extraOptions) {
-      this._options.onerror = !!extraOptions.onerror;
-      this._options.onunhandledrejection = !!extraOptions.onunhandledrejection;
-      this._options.onpagenotfound = !!extraOptions.onpagenotfound;
-      this._options.onmemorywarning = !!extraOptions.onmemorywarning;
+      if (extraOptions.onerror !== undefined) {
+        this._options.onerror = !!extraOptions.onerror;
+      }
+
+      if (extraOptions.onunhandledrejection !== undefined) {
+        this._options.onunhandledrejection = !!extraOptions.onunhandledrejection;
+      }
+
+      if (extraOptions.onpagenotfound !== undefined) {
+        this._options.onpagenotfound = !!extraOptions.onpagenotfound;
+      }
+
+      if (extraOptions.onmemorywarning !== undefined) {
+        this._options.onmemorywarning = !!extraOptions.onmemorywarning;
+      }
     }
   }
 
@@ -98,7 +109,7 @@ export class GlobalHandlers implements Integration {
 
       // https://developers.weixin.qq.com/miniprogram/dev/api/base/app/app-event/wx.onError.html
       sdk.onError((err: string | object) => {
-        // console.info("sentry-uniapp", error);
+        // console.info("sentry-uniapp", err);
         const error = typeof err === 'string' ? new Error(err) : err
         currentHub.captureException(error);
       });
