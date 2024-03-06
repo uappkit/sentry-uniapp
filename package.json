@@ -1,6 +1,6 @@
 {
   "name": "sentry-uniapp",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "用于Uniapp/小程序/快应用等平台的 Sentry SDK",
   "repository": "git://github.com/uappkit/sentry-uniapp.git",
   "homepage": "https://github.com/uappkit/sentry-uniapp",
@@ -26,7 +26,7 @@
   "author": "yinqisen@gmail.com",
   "license": "BSD-3-Clause",
   "engines": {
-    "node": ">=8"
+    "node": ">=14"
   },
   "devDependencies": {
     "@sentry/typescript": "^5.20.0",
@@ -39,8 +39,8 @@
     "ts-loader": "^6.0.4",
     "tslint": "^5.16.0",
     "typescript": "^3.5.3",
-    "webpack": "^4.39.1",
-    "webpack-cli": "^3.3.10",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {

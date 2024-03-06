@@ -90,9 +90,7 @@ export function init(options: MiniappOptions = {}): void {
     options.defaultIntegrations = defaultIntegrations;
   }
 
-  // https://github.com/uappkit/sentry-uniapp/issues/23
   options.normalizeDepth = options.normalizeDepth || 5;
-
   if (options.defaultIntegrations) {
     (options.defaultIntegrations[3] as GlobalHandlers).setExtraOptions(options.extraOptions);
   }

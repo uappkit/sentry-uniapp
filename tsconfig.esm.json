@@ -10,6 +10,7 @@
   "compilerOptions": {
     "outDir": "esm",
     "module": "es6",
-    "target": "es5"
+    "target": "es5",
+    "resolveJsonModule": true,
   }
 }
