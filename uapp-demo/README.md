@@ -17,7 +17,7 @@ npm install
 // API_BASE_URL: API请求的URL域名前缀
 export const API_BASE_URL = process.env.NODE_ENV === 'development'
   ? 'https://api-dev.code0xff.com/'
-  : 'https://api.app.code0xff.com/'
+  : 'https://api.code0xff.com/'
 
 // LOGIN_PAGE: 改为自己的登录页面，HTTP请求401时，会跳转到登录页
 export const LOGIN_PAGE = '/pages/login/login'
@@ -121,4 +121,4 @@ tailwindcss 文档
 <https://tailwindcss.com/docs/container>
 
 uvui (基于uview，支持 vue3)  
-https://www.uvui.cn/components/intro.html
+<https://www.uvui.cn/components/intro.html>
