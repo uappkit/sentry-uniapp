@@ -1,7 +1,7 @@
 {
     "name" : "uapp-demo",
     "appid" : "__UNI__61AF962",
-    "description" : "",
+    "description" : "made by uapp",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
@@ -68,5 +68,5 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "2"
+    "vueVersion" : "3"
 }

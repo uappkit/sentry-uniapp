@@ -1,8 +1,8 @@
 <template>
   <view class="content">
-    <image class="logo" mode="widthFix" src="/static/logo.png"></image>
-    <view class="text-area">
-      <text class="title">`npm i -g uapp`</text>
+    <image class="w-690rpx my-30rpx" mode="widthFix" src="/static/logo.png"></image>
+    <view class="flex justify-center">
+      <text class="text-36rpx text-#8f8f94">{{ title }}</text>
     </view>
   </view>
 </template>
@@ -10,7 +10,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      title: '`npm i -g uapp`'
+    };
   },
   onLoad() {
 
@@ -21,25 +23,6 @@ export default {
 
 <style>
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo {
-  width: 690rpx;
-  margin-top: 30rpx;
-  margin-bottom: 50rpx;
-}
-
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+  @apply flex flex-col items-center justify-center;
 }
 </style>
