@@ -16,10 +16,10 @@ npm install
 ```js
 // API_BASE_URL: API请求的URL域名前缀
 export const API_BASE_URL = process.env.NODE_ENV === 'development'
-  ? 'https://api.code0xff.com/'
-  : 'https://api-dev.app.code0xff.com/'
+  ? 'https://api-dev.code0xff.com/'
+  : 'https://api.app.code0xff.com/'
 
-// LOGIN_PAGE: 改为自己的登陆页面，HTTP请求401时，会跳转到登陆页
+// LOGIN_PAGE: 改为自己的登录页面，HTTP请求401时，会跳转到登录页
 export const LOGIN_PAGE = '/pages/login/login'
 
 // HOME_PAGE: 成功登录后的首页，或从登录导航栏跳转到首页
@@ -80,12 +80,14 @@ uni.$uv.http.post('/api/auth/apple/oaut', {
 })
 
 // POST 方法，注意第三个参数 custom.catch = true, 避免异常被 http 封装拦截
-let res = await uni.$uv.http.post('/api/auth/apple/oauth', {
+uni.$uv.http.post('/api/auth/apple/oauth', {
   info: loginRes.appleInfo,
 }, {
   custom: { catch: true },
 }).then(res => {
   // ...
+}).catch((e) => {
+  // catch exception
 })
 ```
 

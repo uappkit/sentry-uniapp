@@ -11,14 +11,14 @@
 export default {
   data() {
     return {
-      title: '`npm i -g uapp`'
-    };
+      title: '`npm i -g uapp`',
+    }
   },
   onLoad() {
 
   },
-  methods: {}
-};
+  methods: {},
+}
 </script>
 
 <style>
