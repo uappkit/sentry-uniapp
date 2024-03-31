@@ -25,7 +25,7 @@ export const Request = (vm) => {
       },
 
       // #ifdef H5 || APP-PLUS || MP-ALIPAY || MP-WEIXIN
-      timeout: 60000,
+      timeout: 600000,
       // #endif
       // #ifdef APP-PLUS
       sslVerify: true,
@@ -83,7 +83,7 @@ export const Request = (vm) => {
 
     // 自定义参数
     const custom = response.config?.custom
-    if (response.statusCode !== 200) {
+    if (response.statusCode >= 400) {
       // getApp().globalData.sentry.captureMessage(data.message, data)
 
       // 如果没有显式定义custom的toast参数为false的话，默认对报错进行toast弹出提示
@@ -100,7 +100,7 @@ export const Request = (vm) => {
       }
     }
 
-    return data
+    return custom?.raw ? response : data
   }, (response) => {
     // 对响应错误做点什么 （statusCode !== 200）
     return Promise.reject(response)

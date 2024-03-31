@@ -5,7 +5,6 @@
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
-    "networkTimeout": 600000,
     "uapp": {
         "name": "uapp",
         "package": "com.code0xff.uapp",
